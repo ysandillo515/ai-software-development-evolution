@@ -1,5 +1,7 @@
 import sqlite3
+import os
 from fastmcp import FastMCP
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 mcp = FastMCP("SQLite Tool")
 
@@ -7,7 +9,7 @@ mcp = FastMCP("SQLite Tool")
 def query_database(sql: str) -> str:
     """Run a read-only SQL query against the sample products database."""
     try:
-        conn = sqlite3.connect("sample.db")
+        conn = sqlite3.connect(os.path.join(BASE_DIR, "sample.db"))
         cursor = conn.cursor()
         cursor.execute(sql)
         rows = cursor.fetchall()
